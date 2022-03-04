@@ -41,9 +41,9 @@ end
 ```
 
 Select all acceptable answers:
-- [ ] The contacts.name field may be null.
-- [ ] The contacts table has no index.
-- [ ] The table called contacts contains four different data types.
+- [/] The contacts.name field may be null.
+- [/] The contacts table has no index.
+- [/] The table called contacts contains four different data types.
 - [ ] The table called contacts contains four different fields.
 - [ ] The contacts.address field may be null.
 
@@ -69,10 +69,10 @@ end
 
 Select the routing statements that can be used to update a record. Select all acceptable answers:
 - [ ] write /records/:id', to: 'records#update'
-- [ ] put /records/:id', to: 'records#update'
-- [ ] patch '/records/:id', to: 'records#update'
+- [/] put /records/:id', to: 'records#update'
+- [/] patch '/records/:id', to: 'records#update'
 - [ ] post '/records/:id', to: 'records#update'
-- [ ] resource :records, only: [:update]
+- [/] resource :records, only: [:update]
 
 ## Task 5.
 See `app/poros/task_5.rb`
@@ -89,7 +89,7 @@ Extend the application to create `Activities` over multiple steps:
 
 **Step 3**: starts_at, ends_at [back and save buttons]
 
-Update the activity model, controller and views to reflect this functionality. 
+Update the activity model, controller and views to reflect this functionality.
 
 - Every step should have its own form
 - Show `"#{current_step} of 3"`
