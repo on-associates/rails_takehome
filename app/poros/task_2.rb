@@ -5,7 +5,10 @@ class Task2
   # - Returns a hash containing an array of file names for each owner name, in any order.
 
   def group_by_owners(files)
-    #
+    files.each_with_object({}) do |(k, v), grouped|
+      grouped[v] ||= []
+      grouped[v] << k
+    end
   end
 
   # for hash `{'Input.txt' => 'Randy', 'Code.py' => 'Stan', 'Output.txt' => 'Randy'}`
