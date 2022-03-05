@@ -1,0 +1,13 @@
+<div>
+  <%= f.text_field :starts_at %>
+  <% f.object.errors.full_messages_for(:starts_at).each do |message| %>
+    <div class='error-message-start'><%= message %></div>
+  <% end %>
+</div>
+
+<div>
+  <%= f.text_field :ends_at %>
+  <% f.object.errors.full_messages_for(:ends_at).each do |message| %>
+    <div class='error-message-end'><%= message %></div>
+  <% end %>
+</div>

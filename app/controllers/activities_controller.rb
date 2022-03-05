@@ -12,38 +12,37 @@ class ActivitiesController < ApplicationController
 
   # GET /activities/new
   def new
-    @activity = Activity.new
+    wizard = Wizard.new(Activity, session, params).start
+    @activity = wizard.object
   end
 
   # GET /activities/1/edit
   def edit
+    @activity = Activity.find_by(id: params[:id])
+    wizard = Wizard.new(@activity, session, params).start
   end
 
   # POST /activities or /activities.json
   def create
-    @activity = Activity.new(activity_params)
+    @wizard = Wizard.new(Activity, session, params, activity_params).continue
+    @activity = @wizard.object
 
-    respond_to do |format|
-      if @activity.save
-        format.html { redirect_to activity_url(@activity), notice: "Activity was successfully created." }
-        format.json { render :show, status: :created, location: @activity }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @activity.errors, status: :unprocessable_entity }
-      end
+    if @wizard.save
+      redirect_to activities_path, notice: 'Activity created'
+    else
+      render :new
     end
   end
 
   # PATCH/PUT /activities/1 or /activities/1.json
   def update
-    respond_to do |format|
-      if @activity.update(activity_params)
-        format.html { redirect_to activity_url(@activity), notice: "Activity was successfully updated." }
-        format.json { render :show, status: :ok, location: @activity }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @activity.errors, status: :unprocessable_entity }
-      end
+    @wizard = Wizard.new(Activity, session, params, activity_params).continue
+    @activity = @wizard.object
+
+    if @wizard.save
+      redirect_to activities_path, notice: 'Activity updated'
+    else
+      render :edit
     end
   end
 
@@ -65,6 +64,8 @@ class ActivitiesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def activity_params
-      params.require(:activity).permit(:name, :address, :starts_at, :ends_at)
+      return params unless params[:activity]
+
+      params.require(:activity).permit(:current_step, :name, :address, :starts_at, :ends_at)
     end
 end

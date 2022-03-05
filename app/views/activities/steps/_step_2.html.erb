@@ -1,0 +1,6 @@
+<div>
+  <%= f.text_field :address %>
+  <% f.object.errors.full_messages_for(:address).each do |message| %>
+    <div class='error-message'><%= message %></div>
+  <% end %>
+</div>
